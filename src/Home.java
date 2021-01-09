@@ -15,7 +15,7 @@ public class Home {
     private static Image[] homeImags = null;
 
     static {
-        homeImags = new Image[]{tk.getImage(BrickWall.class.getResource("Images/home.jpg")),};
+        homeImags = new Image[]{tk.getImage(Home.class.getResource("Images/home.jpg")),};
     }
 
     public Home(int x, int y, GameFrame tc) {// 构造函数，传递Home的参数并赋值
@@ -49,7 +49,7 @@ public class Home {
             g.drawImage(homeImags[0], x, y, null);
 
             for (int i = 0; i < tc.homeWall.size(); i++) {
-                BrickWall w = tc.homeWall.get(i);
+                Wall w = tc.homeWall.get(i);
                 w.draw(g);
             }
         } else {

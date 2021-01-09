@@ -146,7 +146,7 @@ public class Bullets {
         return false; // 否则返回false
     }
 
-    public boolean hitWall(BrickWall w) { // 子弹打到CommonWall上
+    public boolean hitBrickWall(Wall w) { // 子弹打到CommonWall上
         if (this.live && this.getRect().intersects(w.getRect())) {
             this.live = false;
             this.tc.otherWall.remove(w); // 子弹打到CommonWall墙上时则移除此击中墙
@@ -156,7 +156,7 @@ public class Bullets {
         return false;
     }
 
-    public boolean hitWall(MetalWall w) { // 子弹打到金属墙上
+    public boolean hitMetalWall(Wall w) { // 子弹打到金属墙上
         if (this.live && this.getRect().intersects(w.getRect())) {
             this.live = false;
             // this.tc.metalWall.remove(w); //子弹不能穿越金属墙

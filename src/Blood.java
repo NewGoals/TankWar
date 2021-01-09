@@ -18,7 +18,7 @@ public class Blood {
     private boolean live = false;
 
     private static Toolkit tk = Toolkit.getDefaultToolkit();
-    private Image[] bloodImags = new Image[]{tk.getImage(BrickWall.class.getResource("Images/hp.png")),};
+    private Image[] bloodImags = new Image[]{tk.getImage(Blood.class.getResource("Images/hp.png")),};
 
     private int[][] poition = {{155, 196}, {500, 58}, {80, 340}, {99, 199}, {345, 456}, {123, 321}, {258, 413}};
 

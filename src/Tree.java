@@ -13,7 +13,7 @@ public class Tree {
     private static Image[] treeImags = null;
 
     static {
-        treeImags = new Image[]{tk.getImage(BrickWall.class.getResource("Images/tree.gif")),};
+        treeImags = new Image[]{tk.getImage(Tree.class.getResource("Images/tree.gif")),};
     }
 
     public Tree(int x, int y, GameFrame tc) { // Tree的构造方法，传递x，y和tc对象

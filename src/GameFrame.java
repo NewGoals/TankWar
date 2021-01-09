@@ -31,9 +31,9 @@ public class GameFrame extends Frame implements ActionListener {
     List<BombTank> bombTanks = new ArrayList<BombTank>();
     List<Bullets> bullets = new ArrayList<Bullets>();
     List<Tree> trees = new ArrayList<Tree>();
-    List<BrickWall> homeWall = new ArrayList<BrickWall>(); // 实例化对象容器
-    List<BrickWall> otherWall = new ArrayList<BrickWall>();
-    List<MetalWall> metalWall = new ArrayList<MetalWall>();
+    List<Wall> homeWall = new ArrayList<>(); // 实例化对象容器
+    List<Wall> otherWall = new ArrayList<>();
+    List<Wall> metalWall = new ArrayList<>();
 
     // 这是一个重写的方法,将由repaint()方法自动调用
     public void update(Graphics g) {
@@ -80,10 +80,10 @@ public class GameFrame extends Frame implements ActionListener {
         }
 
         for (int i = 0; i < theRiver.size(); i++) {    // 撞到河流，恢复原位
-            River r = theRiver.get(i);
-            homeTank.collideRiver(r);
+            River river = theRiver.get(i);
+            homeTank.collideRiver(river);
 
-            r.draw(g);
+            river.draw(g);
         }
 
         home.draw(g); // 画出home
@@ -91,26 +91,26 @@ public class GameFrame extends Frame implements ActionListener {
         homeTank.eat(blood);// 加血--生命值
 
         for (int i = 0; i < bullets.size(); i++) { // 对每一个子弹
-            Bullets m = bullets.get(i);
-            m.hitTanks(tanks); // 每一个子弹打到坦克上
-            m.hitTank(homeTank); // 每一个子弹打到自己家的坦克上时
-            m.hitHome(); // 每一个子弹打到家里时
+            Bullets bullets = this.bullets.get(i);
+            bullets.hitTanks(tanks); // 每一个子弹打到坦克上
+            bullets.hitTank(homeTank); // 每一个子弹打到自己家的坦克上时
+            bullets.hitHome(); // 每一个子弹打到家里时
 
             for (int j = 0; j < metalWall.size(); j++) { // 每一个子弹打到金属墙上
-                MetalWall mw = metalWall.get(j);
-                m.hitWall(mw);
+                Wall wall = metalWall.get(j);
+                bullets.hitMetalWall(wall);
             }
 
             for (int j = 0; j < otherWall.size(); j++) {// 每一个子弹打到其他墙上
-                BrickWall w = otherWall.get(j);
-                m.hitWall(w);
+                Wall wall = otherWall.get(j);
+                bullets.hitBrickWall(wall);
             }
 
             for (int j = 0; j < homeWall.size(); j++) {// 每一个子弹打到家的墙上
-                BrickWall cw = homeWall.get(j);
-                m.hitWall(cw);
+                Wall wall = homeWall.get(j);
+                bullets.hitBrickWall(wall);
             }
-            m.draw(g); // 画出效果图
+            bullets.draw(g); // 画出效果图
         }
 
         // 画出每一辆敌方坦克
@@ -118,24 +118,24 @@ public class GameFrame extends Frame implements ActionListener {
             Tank t = tanks.get(i); // 获得键值对的键
 
             for (int j = 0; j < homeWall.size(); j++) {
-                BrickWall cw = homeWall.get(j);
-                t.collideWithWall(cw); // 每一个坦克撞到家里的墙时
-                cw.draw(g);
+                Wall wall = homeWall.get(j);
+                t.collideBrickWithWall(wall); // 每一个坦克撞到家里的墙时
+                wall.draw(g);
             }
             for (int j = 0; j < otherWall.size(); j++) { // 每一个坦克撞到家以外的墙
-                BrickWall cw = otherWall.get(j);
-                t.collideWithWall(cw);
-                cw.draw(g);
+                Wall wall = otherWall.get(j);
+                t.collideBrickWithWall(wall);
+                wall.draw(g);
             }
             for (int j = 0; j < metalWall.size(); j++) { // 每一个坦克撞到金属墙
-                MetalWall mw = metalWall.get(j);
-                t.collideWithWall(mw);
-                mw.draw(g);
+                Wall wall = metalWall.get(j);
+                t.collideMetalWithWall(wall);
+                wall.draw(g);
             }
             for (int j = 0; j < theRiver.size(); j++) {
-                River r = theRiver.get(j); // 每一个坦克撞到河流时
-                t.collideRiver(r);
-                r.draw(g);
+                River river = theRiver.get(j); // 每一个坦克撞到河流时
+                t.collideRiver(river);
+                river.draw(g);
                 // t.draw(g);
             }
 
@@ -148,44 +148,44 @@ public class GameFrame extends Frame implements ActionListener {
         blood.draw(g);// 画出加血包
 
         for (int i = 0; i < trees.size(); i++) { // 画出trees
-            Tree tr = trees.get(i);
-            tr.draw(g);
+            Tree tree = trees.get(i);
+            tree.draw(g);
         }
 
         for (int i = 0; i < bombTanks.size(); i++) { // 画出爆炸效果
-            BombTank bt = bombTanks.get(i);
-            bt.draw(g);
+            BombTank bombTank = bombTanks.get(i);
+            bombTank.draw(g);
         }
 
         for (int i = 0; i < otherWall.size(); i++) { // 画出otherWall
-            BrickWall cw = otherWall.get(i);
-            cw.draw(g);
+            Wall wall = otherWall.get(i);
+            wall.draw(g);
         }
 
         for (int i = 0; i < metalWall.size(); i++) { // 画出metalWall
-            MetalWall mw = metalWall.get(i);
-            mw.draw(g);
+            Wall wall = metalWall.get(i);
+            wall.draw(g);
         }
 
         homeTank.collideWithTanks(tanks);
         homeTank.collideHome(home);
 
         for (int i = 0; i < metalWall.size(); i++) {// 撞到金属墙
-            MetalWall w = metalWall.get(i);
-            homeTank.collideWithWall(w);
-            w.draw(g);
+            Wall wall = metalWall.get(i);
+            homeTank.collideMetalWithWall(wall);
+            wall.draw(g);
         }
 
         for (int i = 0; i < otherWall.size(); i++) {    // 画出砖墙
-            BrickWall cw = otherWall.get(i);
-            homeTank.collideWithWall(cw);
-            cw.draw(g);
+            Wall wall = otherWall.get(i);
+            homeTank.collideBrickWithWall(wall);
+            wall.draw(g);
         }
 
         for (int i = 0; i < homeWall.size(); i++) { // 家里的坦克撞到自己家
-            BrickWall w = homeWall.get(i);
-            homeTank.collideWithWall(w);
-            w.draw(g);
+            Wall wall = homeWall.get(i);
+            homeTank.collideBrickWithWall(wall);
+            wall.draw(g);
         }
 
     }
@@ -256,36 +256,37 @@ public class GameFrame extends Frame implements ActionListener {
 
         for (int i = 0; i < 10; i++) { // 家的格局
             if (i < 4) {
-                homeWall.add(new BrickWall(350, 580 - 21 * i, this));
+                homeWall.add(WallFactory.getWall("brick",350, 580 - 21 * i, this));
             } else if (i < 7) {
-                homeWall.add(new BrickWall(372 + 22 * (i - 4), 517, this));
+                homeWall.add(WallFactory.getWall("brick",372 + 22 * (i - 4), 517, this));
             } else {
-                homeWall.add(new BrickWall(416, 538 + (i - 7) * 21, this));
+                homeWall.add(WallFactory.getWall("brick",416, 538 + (i - 7) * 21, this));
             }
         }
 
         for (int i = 0; i < 32; i++) { // 砖墙
             if (i < 16) {
-                otherWall.add(new BrickWall(220 + 20 * i, 300, this)); // 砖墙布局
-                otherWall.add(new BrickWall(500 + 20 * i, 180, this));
-                otherWall.add(new BrickWall(200, 400 + 20 * i, this));
-                otherWall.add(new BrickWall(500, 400 + 20 * i, this));
+                otherWall.add(WallFactory.getWall("brick",220 + 20 * i, 300, this));
+                otherWall.add(WallFactory.getWall("brick",500 + 20 * i, 180,  this));
+                otherWall.add(WallFactory.getWall("brick",200, 400 + 20 * i, this));
+                otherWall.add(WallFactory.getWall("brick",500, 400 + 20 * i,  this));
             } else if (i < 32) {
-                otherWall.add(new BrickWall(220 + 20 * (i - 16), 320, this));
-                otherWall.add(new BrickWall(500 + 20 * (i - 16), 220, this));
-                otherWall.add(new BrickWall(220, 400 + 20 * (i - 16), this));
-                otherWall.add(new BrickWall(520, 400 + 20 * (i - 16), this));
+                otherWall.add(WallFactory.getWall("brick",220 + 20 * (i - 16), 320, this));
+                otherWall.add(WallFactory.getWall("brick",500 + 20 * (i - 16), 220, this));
+                otherWall.add(WallFactory.getWall("brick",220, 400 + 20 * (i - 16),  this));
+                otherWall.add(WallFactory.getWall("brick",520, 400 + 20 * (i - 16), this));
             }
         }
 
         for (int i = 0; i < 20; i++) { // 金属墙布局
             if (i < 10) {
-                metalWall.add(new MetalWall(140 + 30 * i, 150, this));
-                metalWall.add(new MetalWall(600, 400 + 20 * (i), this));
-            } else if (i < 20)
-                metalWall.add(new MetalWall(140 + 30 * (i - 10), 180, this));
+                metalWall.add(WallFactory.getWall("metal",140 + 30 * i, 150, this));
+                metalWall.add(WallFactory.getWall("metal",600, 400 + 20 * (i),this));
+            } else if (i < 20) {
+                metalWall.add(WallFactory.getWall("metal",140 + 30 * (i - 10), 180, this));
+            }
             else {
-                metalWall.add(new MetalWall(500 + 30 * (i - 10), 160, this));
+                metalWall.add(WallFactory.getWall("metal",500 + 30 * (i - 10), 160, this));
             }
         }
 

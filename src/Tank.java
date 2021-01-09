@@ -244,7 +244,7 @@ public class Tank {
         return good;
     }
 
-    public boolean collideWithWall(BrickWall w) { // 碰撞到普通墙时
+    public boolean collideBrickWithWall(Wall w) { // 碰撞到普通墙时
         if (this.live && this.getRect().intersects(w.getRect())) {
             this.changToOldDir(); // 转换到原来的方向上去
             return true;
@@ -252,7 +252,7 @@ public class Tank {
         return false;
     }
 
-    public boolean collideWithWall(MetalWall w) { // 撞到金属墙
+    public boolean collideMetalWithWall(Wall w) { // 撞到金属墙
         if (this.live && this.getRect().intersects(w.getRect())) {
             this.changToOldDir();
             return true;
