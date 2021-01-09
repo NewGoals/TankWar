@@ -13,8 +13,8 @@ public class BrickWall {
     private static Image[] wallImags = null;
 
     static {
-        wallImags = new Image[]{ // ´¢´æcommonWallµÄÍ¼Æ¬
-                tk.getImage(BrickWall.class.getResource("Images/commonWall.gif")),};
+        // ´¢´æcommonWallµÄÍ¼Æ¬
+        wallImags = new Image[]{tk.getImage(BrickWall.class.getResource("Images/commonWall.gif")),};
     }
 
     public BrickWall(int x, int y, GameFrame tc) { // ¹¹Ôìº¯Êý

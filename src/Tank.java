@@ -113,10 +113,10 @@ public class Tank {
             x = 0;
         if (y < 40) // 防止走出规定区域
             y = 40;
-        if (x + Tank.width > GameFrame.Fram_width) // 超过区域则恢复到边界
-            x = GameFrame.Fram_width - Tank.width;
-        if (y + Tank.length > GameFrame.Fram_length)
-            y = GameFrame.Fram_length - Tank.length;
+        if (x + Tank.width > GameFrame.FRAME_WIDTH) // 超过区域则恢复到边界
+            x = GameFrame.FRAME_WIDTH - Tank.width;
+        if (y + Tank.length > GameFrame.FRAME_LENGTH)
+            y = GameFrame.FRAME_LENGTH - Tank.length;
 
         if (!good) {
             Direction[] directons = Direction.values();
@@ -204,34 +204,29 @@ public class Tank {
     public void keyReleased(KeyEvent e) { // 键盘释放监听
         int key = e.getKeyCode();
         switch (key) {
-
             case KeyEvent.VK_F:
                 fire();
                 break;
-
             case KeyEvent.VK_RIGHT:
                 bR = false;
                 break;
-
             case KeyEvent.VK_LEFT:
                 bL = false;
                 break;
-
             case KeyEvent.VK_UP:
                 bU = false;
                 break;
-
             case KeyEvent.VK_DOWN:
                 bD = false;
                 break;
-
         }
         decideDirection(); // 释放键盘后确定移动方向
     }
 
     public Bullets fire() { // 开火方法
-        if (!live)
+        if (!live) {
             return null;
+        }
         int x = this.x + Tank.width / 2 - Bullets.width / 2; // 开火位置
         int y = this.y + Tank.length / 2 - Bullets.length / 2;
         Bullets m = new Bullets(x, y + 2, good, Kdirection, this.tc); // 没有给定方向时，向原来的方向发火

@@ -29,13 +29,9 @@ public class Bullets {
     static {
         bulletImages = new Image[]{ // 不同方向的子弹
                 tk.getImage(Bullets.class.getClassLoader().getResource("Images/bulletL.gif")),
-
                 tk.getImage(Bullets.class.getClassLoader().getResource("Images/bulletU.gif")),
-
                 tk.getImage(Bullets.class.getClassLoader().getResource("Images/bulletR.gif")),
-
                 tk.getImage(Bullets.class.getClassLoader().getResource("Images/bulletD.gif")),
-
         };
 
         imgs.put("L", bulletImages[0]); // 加入Map容器
@@ -62,7 +58,6 @@ public class Bullets {
     }
 
     private void move() {
-
         switch (diretion) {
             case L:
                 x -= speedX; // 子弹不断向左进攻
@@ -84,7 +79,7 @@ public class Bullets {
                 break;
         }
 
-        if (x < 0 || y < 0 || x > GameFrame.Fram_width || y > GameFrame.Fram_length) {
+        if (x < 0 || y < 0 || x > GameFrame.FRAME_WIDTH || y > GameFrame.FRAME_LENGTH) {
             live = false;
         }
     }
@@ -113,7 +108,6 @@ public class Bullets {
                 break;
 
         }
-
         move(); // 调用子弹move()函数
     }
 
@@ -135,7 +129,6 @@ public class Bullets {
     }
 
     public boolean hitTank(Tank t) { // 当子弹打到坦克上
-
         if (this.live && this.getRect().intersects(t.getRect()) && t.isLive() && this.good != t.isGood()) {
 
             BombTank e = new BombTank(t.getX(), t.getY(), tc);
@@ -147,9 +140,7 @@ public class Bullets {
             } else {
                 t.setLive(false);
             }
-
             this.live = false;
-
             return true; // 射击成功，返回true
         }
         return false; // 否则返回false

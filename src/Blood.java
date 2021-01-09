@@ -20,8 +20,7 @@ public class Blood {
     private static Toolkit tk = Toolkit.getDefaultToolkit();
     private Image[] bloodImags = new Image[]{tk.getImage(BrickWall.class.getResource("Images/hp.png")),};
 
-    private int[][] poition = {{155, 196}, {500, 58}, {80, 340}, {99, 199}, {345, 456}, {123, 321},
-            {258, 413}};
+    private int[][] poition = {{155, 196}, {500, 58}, {80, 340}, {99, 199}, {345, 456}, {123, 321}, {258, 413}};
 
     public void draw(Graphics g) {
         if (r.nextInt(100) > 98) {
@@ -31,7 +30,6 @@ public class Blood {
         if (!live)
             return;
         g.drawImage(bloodImags[0], x, y, null);
-
     }
 
     private void move() {
@@ -41,7 +39,6 @@ public class Blood {
         }
         x = poition[step][0];
         y = poition[step][1];
-
     }
 
     public Rectangle getRect() {

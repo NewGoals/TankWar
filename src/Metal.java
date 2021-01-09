@@ -6,8 +6,8 @@ public class Metal extends Wall {
     private static Image[] wallImags = null;
 
     static {
-        wallImags = new Image[]{ // ´¢´æcommonWallµÄÍ¼Æ¬
-                tk.getImage(BrickWall.class.getResource("Images/metalWall.gif")),};
+        // ´¢´æcommonWallµÄÍ¼Æ¬
+        wallImags = new Image[]{tk.getImage(BrickWall.class.getResource("Images/metalWall.gif")),};
     }
 
     public Metal(int x, int y, GameFrame tc) { // ¹¹Ôìº¯Êý
