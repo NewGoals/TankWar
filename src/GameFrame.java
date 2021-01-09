@@ -10,8 +10,8 @@ import java.util.List;
 
 public class GameFrame extends Frame implements ActionListener {
 
-    public static final int FRAME_WIDTH = 800; // 静态全局窗口大小
-    public static final int FRAME_LENGTH = 600;
+    public static final int FRAME_WIDTH = Property.getInt("window.width"); // 静态全局窗口大小
+    public static final int FRAME_LENGTH = Property.getInt("window.height");
     public static boolean printable = true; // 记录暂停状态，此时线程不刷新界面
     private long startTime = System.currentTimeMillis();
     private long currentTime = startTime;
@@ -300,7 +300,7 @@ public class GameFrame extends Frame implements ActionListener {
 
         theRiver.add(new River(85, 100, this));
 
-        for (int i = 0; i < 20; i++) { // 初始化20辆坦克, 设置坦克出现的位置
+        for (int i = 0; i < Property.getInt("game.tank.initCount"); i++) { // 初始化20辆坦克, 设置坦克出现的位置
             if (i < 9) {
                 tanks.add(new Tank(150 + 70 * i, 40, false, Direction.D, this));
             } else if (i < 15) {

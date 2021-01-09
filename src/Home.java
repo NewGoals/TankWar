@@ -7,7 +7,8 @@ import java.awt.*;
 public class Home {
     private int x, y;
     private GameFrame tc;
-    public static final int width = 30, length = 30; // 全局静态变量长宽
+    public static final int width = Property.getInt("game.home.size");
+    public static final int length = Property.getInt("game.home.size"); // 全局静态变量长宽
     private boolean live = true;
 
     private static Toolkit tk = Toolkit.getDefaultToolkit(); // 全局静态变量

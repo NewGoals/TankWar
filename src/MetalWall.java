@@ -4,8 +4,8 @@ import java.awt.*;
  * 金属墙类（钢板,子弹不可打穿）
  */
 public class MetalWall {
-    public static final int width = 30; // 设置金属墙的长宽静态全局参数
-    public static final int length = 30;
+    public static final int width = Property.getInt("game.metalWall.size"); // 设置金属墙的长宽静态全局参数
+    public static final int length = Property.getInt("game.metalWall.size");
     private int x, y;
     GameFrame tc;
     private static Toolkit tk = Toolkit.getDefaultToolkit();

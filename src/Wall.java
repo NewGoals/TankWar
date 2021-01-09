@@ -1,8 +1,8 @@
 import java.awt.*;
 
 public abstract class Wall {
-    public static final int width = 20; // 设置墙的固定参数
-    public static final int length = 20;
+    public static final int width = Property.getInt("game.wall.size");
+    public static final int length = Property.getInt("game.wall.size");
     int x, y;
 
     public abstract void draw(Graphics g);

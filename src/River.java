@@ -4,8 +4,8 @@ import java.awt.*;
  * 河流类
  */
 public class River {
-    public static final int riverWidth = 55;
-    public static final int riverLength = 154;// 静态全局变量
+    public static final int riverWidth = Property.getInt("game.river.width");
+    public static final int riverLength = Property.getInt("game.river.height");// 静态全局变量
     private int x, y;
     GameFrame tc;
 

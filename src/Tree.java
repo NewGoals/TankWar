@@ -5,8 +5,8 @@ import java.awt.*;
  */
 
 public class Tree {
-    public static final int width = 30;
-    public static final int length = 30;
+    public static final int width = Property.getInt("game.tree.size");
+    public static final int length = Property.getInt("game.tree.size");
     int x, y;
     GameFrame tc;
     private static Toolkit tk = Toolkit.getDefaultToolkit();

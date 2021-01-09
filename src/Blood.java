@@ -7,8 +7,8 @@ import java.util.Random;
 
 public class Blood {
 
-    public static final int width = 36;
-    public static final int length = 36;
+    public static final int width = Property.getInt("game.blood.size");
+    public static final int length = Property.getInt("game.blood.size");
 
     private int x, y;
     GameFrame tc;

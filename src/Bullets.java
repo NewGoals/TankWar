@@ -8,11 +8,11 @@ import java.util.Map;
  */
 
 public class Bullets {
-    public static int speedX = 10;
-    public static int speedY = 10; // 子弹的全局静态速度
+    public static int speedX = Property.getInt("game.bullet.speed");
+    public static int speedY = Property.getInt("game.bullet.speed"); // 子弹的全局静态速度
 
-    public static final int width = 10;
-    public static final int length = 10;
+    public static final int width = Property.getInt("game.bullet.size");
+    public static final int length = Property.getInt("game.bullet.size");
 
     private int x, y;
     Direction diretion;

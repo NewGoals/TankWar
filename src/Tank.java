@@ -7,9 +7,9 @@ import java.util.Random;
  */
 
 public class Tank {
-    public static int speedX = 6, speedY = 6; // 静态全局变量速度
+    public static int speedX = Property.getInt("game.tank.speed"), speedY = Property.getInt("game.tank.speed"); // 坦克速度
     public static int count = 0;
-    public static final int width = 35, length = 35; // 坦克的全局大小，具有不可改变性
+    public static final int width = Property.getInt("game.tank.size"), length = Property.getInt("game.tank.size"); // 坦克大小
     private Direction direction = Direction.STOP; // 初始化状态为静止
     private Direction Kdirection = Direction.U; // 初始化方向为向上
     GameFrame tc;
@@ -66,25 +66,21 @@ public class Tank {
             case D:
                 g.drawImage(tankImags[0], x, y, null);
                 break;
-
             case U:
                 g.drawImage(tankImags[1], x, y, null);
                 break;
             case L:
                 g.drawImage(tankImags[2], x, y, null);
                 break;
-
             case R:
                 g.drawImage(tankImags[3], x, y, null);
                 break;
-
         }
 
         move(); // 调用move函数
     }
 
     void move() {
-
         this.oldX = x;
         this.oldY = y;
 

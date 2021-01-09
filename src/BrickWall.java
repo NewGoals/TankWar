@@ -4,8 +4,8 @@ import java.awt.*;
  * 砖墙类（子弹可打穿）
  */
 public class BrickWall {
-    public static final int width = 20; // 设置墙的固定参数
-    public static final int length = 20;
+    public static final int width = Property.getInt("game.brick.size"); // 设置墙的固定参数
+    public static final int length = Property.getInt("game.brick.size");
     int x, y;
 
     GameFrame tc;
