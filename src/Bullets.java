@@ -28,13 +28,13 @@ public class Bullets {
 
     static {
         bulletImages = new Image[]{ // 不同方向的子弹
-                tk.getImage(Bullets.class.getClassLoader().getResource("images/bulletL.gif")),
+                tk.getImage(Bullets.class.getClassLoader().getResource("Images/bulletL.gif")),
 
-                tk.getImage(Bullets.class.getClassLoader().getResource("images/bulletU.gif")),
+                tk.getImage(Bullets.class.getClassLoader().getResource("Images/bulletU.gif")),
 
-                tk.getImage(Bullets.class.getClassLoader().getResource("images/bulletR.gif")),
+                tk.getImage(Bullets.class.getClassLoader().getResource("Images/bulletR.gif")),
 
-                tk.getImage(Bullets.class.getClassLoader().getResource("images/bulletD.gif")),
+                tk.getImage(Bullets.class.getClassLoader().getResource("Images/bulletD.gif")),
 
         };
 

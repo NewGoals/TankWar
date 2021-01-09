@@ -266,7 +266,7 @@ public class GameFrame extends Frame implements ActionListener {
         jmi9.setActionCommand("level4");
 
         this.setMenuBar(jmb);// 菜单Bar放到JFrame上
-        this.setVisible(true);
+        // this.setVisible(true);
 
         for (int i = 0; i < 10; i++) { // 家的格局
             if (i < 4)
@@ -346,7 +346,6 @@ public class GameFrame extends Frame implements ActionListener {
 
     private class PaintThread implements Runnable {
         public void run() {
-            // TODO Auto-generated method stub
             while (printable) {
                 repaint();
                 try {
@@ -393,7 +392,6 @@ public class GameFrame extends Frame implements ActionListener {
             // Thread.sleep(10000);
             //
             // } catch (InterruptedException e1) {
-            // // TODO Auto-generated catch block
             // e1.printStackTrace();
             // }
         } else if (e.getActionCommand().equals("Continue")) {// 继续
