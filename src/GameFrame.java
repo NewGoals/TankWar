@@ -14,6 +14,7 @@ public class GameFrame extends Frame implements ActionListener {
     public static final int FRAME_LENGTH = 600;
     public static boolean printable = true; // 记录暂停状态，此时线程不刷新界面
     private long startTime = System.currentTimeMillis();
+    private long currentTime = startTime;
     MenuBar menuBar = null;
     Menu menu1 = null, menu2 = null, menu3 = null, menu4 = null;
     MenuItem menuItem1 = null, menuItem2 = null, menuItem3 = null, menuItem4 = null,
@@ -54,7 +55,7 @@ public class GameFrame extends Frame implements ActionListener {
         g.setFont(new Font("TimesRoman", Font.BOLD, 20));
         g.drawString("区域内还有敌方坦克: "+ tanks.size(), 50, 85);
         g.drawString("剩余生命值: " + homeTank.getLife(), 320, 85);
-        // g.drawString("游戏用时: " + ((System.currentTimeMillis() - startTime) / 1000), 550, 85);
+        g.drawString("游戏用时: " + ((currentTime - startTime) / 1000), 550, 85);
         g.setFont(f1);
 
         // 如果玩家赢了（条件是敌方坦克全灭、大本营健在、玩家坦克仍有血量）
@@ -67,11 +68,9 @@ public class GameFrame extends Frame implements ActionListener {
         }
 
         if (!homeTank.isLive()) {
-            Font f = g.getFont();
-            g.setFont(new Font("TimesRoman", Font.BOLD, 40));
-            tanks.clear();
-            bullets.clear();
-            g.setFont(f);
+            home.gameOver(g);
+        } else {
+            currentTime = System.currentTimeMillis();
         }
         g.setColor(c);
 
@@ -325,7 +324,7 @@ public class GameFrame extends Frame implements ActionListener {
         this.setBackground(Color.GREEN);
         this.setVisible(true);
 
-        this.addKeyListener(new KeyMonitor());// 键盘监听
+        this.addKeyListener(new KeyMonitor(this));// 键盘监听
         new Thread(new PaintThread()).start(); // 线程启动
     }
 
@@ -347,12 +346,19 @@ public class GameFrame extends Frame implements ActionListener {
     }
 
     private class KeyMonitor extends KeyAdapter {
+
+        private Frame frame;
+
+        public KeyMonitor(Frame frame) {
+            this.frame = frame;
+        }
+
         public void keyReleased(KeyEvent e) { // 监听键盘释放
             homeTank.keyReleased(e);
         }
 
         public void keyPressed(KeyEvent e) { // 监听键盘按下
-            homeTank.keyPressed(e);
+            homeTank.keyPressed(e, frame);
         }
     }
 

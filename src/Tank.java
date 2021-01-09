@@ -137,7 +137,7 @@ public class Tank {
         y = oldY;
     }
 
-    public void keyPressed(KeyEvent e) { // 接受键盘事件
+    public void keyPressed(KeyEvent e, Frame frame) { // 接受键盘事件
         int key = e.getKeyCode();
         switch (key) {
             case KeyEvent.VK_R: // 当按下R时，重新开始游戏
@@ -163,20 +163,18 @@ public class Tank {
 
                 if (!tc.home.isLive()) // 将home重置生命
                     tc.home.setLive(true);
+                frame.dispose();
                 new GameFrame(); // 重新创建面板
                 break;
             case KeyEvent.VK_RIGHT: // 监听向右键
                 bR = true;
                 break;
-
             case KeyEvent.VK_LEFT:// 监听向左键
                 bL = true;
                 break;
-
             case KeyEvent.VK_UP: // 监听向上键
                 bU = true;
                 break;
-
             case KeyEvent.VK_DOWN:// 监听向下键
                 bD = true;
                 break;

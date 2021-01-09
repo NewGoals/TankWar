@@ -24,7 +24,6 @@ public class Home {
     }
 
     public void gameOver(Graphics g) {
-
         tc.tanks.clear();// 作清理页面工作
         tc.metalWall.clear();
         tc.otherWall.clear();
@@ -41,7 +40,6 @@ public class Home {
         g.drawString("  游戏结束！ ", 220, 300);
         g.setFont(f);
         g.setColor(c);
-
     }
 
     public void draw(Graphics g) {
