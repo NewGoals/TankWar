@@ -6,6 +6,7 @@ public abstract class Wall {
     int x, y;
 
     public abstract void draw(Graphics g);
+
     public Rectangle getRect() { // 构造指定参数的长方形实例
         return new Rectangle(x, y, width, length);
     }

@@ -1,12 +1,13 @@
 import java.awt.*;
 
-public class Metal extends Wall{
+public class Metal extends Wall {
     GameFrame tc;
     private static Toolkit tk = Toolkit.getDefaultToolkit();
     private static Image[] wallImags = null;
+
     static {
-        wallImags = new Image[] { // ´¢´æcommonWallµÄÍ¼Æ¬
-                tk.getImage(BrickWall.class.getResource("Images/metalWall.gif")), };
+        wallImags = new Image[]{ // ´¢´æcommonWallµÄÍ¼Æ¬
+                tk.getImage(BrickWall.class.getResource("Images/metalWall.gif")),};
     }
 
     public Metal(int x, int y, GameFrame tc) { // ¹¹Ôìº¯Êý
