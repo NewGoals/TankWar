@@ -146,20 +146,13 @@ public class Bullets {
         return false; // 否则返回false
     }
 
-    public boolean hitBrickWall(Wall w) { // 子弹打到CommonWall上
+    public boolean hitWall(Wall w) { // 子弹打到金属墙上
         if (this.live && this.getRect().intersects(w.getRect())) {
             this.live = false;
-            this.tc.otherWall.remove(w); // 子弹打到CommonWall墙上时则移除此击中墙
-            this.tc.homeWall.remove(w);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean hitMetalWall(Wall w) { // 子弹打到金属墙上
-        if (this.live && this.getRect().intersects(w.getRect())) {
-            this.live = false;
-            // this.tc.metalWall.remove(w); //子弹不能穿越金属墙
+            if (w.getType().equals("brick")){
+                this.tc.otherWall.remove(w); // 子弹打到CommonWall墙上时则移除此击中墙
+                this.tc.homeWall.remove(w);
+            }
             return true;
         }
         return false;

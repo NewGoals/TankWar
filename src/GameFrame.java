@@ -82,7 +82,6 @@ public class GameFrame extends Frame implements ActionListener {
         for (int i = 0; i < theRiver.size(); i++) {    // 撞到河流，恢复原位
             River river = theRiver.get(i);
             homeTank.collideRiver(river);
-
             river.draw(g);
         }
 
@@ -97,52 +96,49 @@ public class GameFrame extends Frame implements ActionListener {
             bullets.hitHome(); // 每一个子弹打到家里时
 
             for (int j = 0; j < metalWall.size(); j++) { // 每一个子弹打到金属墙上
-                Wall wall = metalWall.get(j);
-                bullets.hitMetalWall(wall);
+                bullets.hitWall(metalWall.get(j));
             }
 
             for (int j = 0; j < otherWall.size(); j++) {// 每一个子弹打到其他墙上
-                Wall wall = otherWall.get(j);
-                bullets.hitBrickWall(wall);
+                bullets.hitWall(otherWall.get(j));
             }
 
             for (int j = 0; j < homeWall.size(); j++) {// 每一个子弹打到家的墙上
-                Wall wall = homeWall.get(j);
-                bullets.hitBrickWall(wall);
+                bullets.hitWall(homeWall.get(j));
             }
             bullets.draw(g); // 画出效果图
         }
 
         // 画出每一辆敌方坦克
         for (int i = 0; i < tanks.size(); i++) {
-            Tank t = tanks.get(i); // 获得键值对的键
+            Tank tank = tanks.get(i); // 获得键值对的键
 
             for (int j = 0; j < homeWall.size(); j++) {
                 Wall wall = homeWall.get(j);
-                t.collideBrickWithWall(wall); // 每一个坦克撞到家里的墙时
+                tank.collideWithWall(wall); // 每一个坦克撞到家里的墙时
                 wall.draw(g);
             }
             for (int j = 0; j < otherWall.size(); j++) { // 每一个坦克撞到家以外的墙
                 Wall wall = otherWall.get(j);
-                t.collideBrickWithWall(wall);
+                tank.collideWithWall(wall);
                 wall.draw(g);
             }
             for (int j = 0; j < metalWall.size(); j++) { // 每一个坦克撞到金属墙
                 Wall wall = metalWall.get(j);
-                t.collideMetalWithWall(wall);
+                tank.collideWithWall(wall);
                 wall.draw(g);
             }
             for (int j = 0; j < theRiver.size(); j++) {
                 River river = theRiver.get(j); // 每一个坦克撞到河流时
-                t.collideRiver(river);
+                tank.collideRiver(river);
                 river.draw(g);
                 // t.draw(g);
             }
 
-            t.collideWithTanks(tanks); // 撞到自己的人
-            t.collideHome(home);
+            tank.collideWithTanks(tanks); // 撞到自己的人
+            tank.collideHome(home);
 
-            t.draw(g);
+            tank.draw(g);
         }
 
         blood.draw(g);// 画出加血包
@@ -172,19 +168,19 @@ public class GameFrame extends Frame implements ActionListener {
 
         for (int i = 0; i < metalWall.size(); i++) {// 撞到金属墙
             Wall wall = metalWall.get(i);
-            homeTank.collideMetalWithWall(wall);
+            homeTank.collideWithWall(wall);
             wall.draw(g);
         }
 
         for (int i = 0; i < otherWall.size(); i++) {    // 画出砖墙
             Wall wall = otherWall.get(i);
-            homeTank.collideBrickWithWall(wall);
+            homeTank.collideWithWall(wall);
             wall.draw(g);
         }
 
         for (int i = 0; i < homeWall.size(); i++) { // 家里的坦克撞到自己家
             Wall wall = homeWall.get(i);
-            homeTank.collideBrickWithWall(wall);
+            homeTank.collideWithWall(wall);
             wall.draw(g);
         }
 
