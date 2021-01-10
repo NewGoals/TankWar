@@ -250,7 +250,7 @@ public class GameFrame extends Frame implements ActionListener {
 
         this.setMenuBar(menuBar);// 菜单Bar放到JFrame上
 
-        for (int i = 0; i < 10; i++) { // 家的格局
+        for (int i = 0; i < MapProperty.getInt("game.home.initCount"); i++) { // 家的格局
             if (i < 4) {
                 homeWall.add(WallFactory.getWall("brick",350, 580 - 21 * i, this));
             } else if (i < 7) {
@@ -260,7 +260,7 @@ public class GameFrame extends Frame implements ActionListener {
             }
         }
 
-        for (int i = 0; i < 32; i++) { // 砖墙
+        for (int i = 0; i < MapProperty.getInt("game.brick.initCount"); i++) { // 砖墙
             if (i < 16) {
                 otherWall.add(WallFactory.getWall("brick",220 + 20 * i, 300, this));
                 otherWall.add(WallFactory.getWall("brick",500 + 20 * i, 180,  this));
@@ -274,19 +274,18 @@ public class GameFrame extends Frame implements ActionListener {
             }
         }
 
-        for (int i = 0; i < 20; i++) { // 金属墙布局
+        for (int i = 0; i < MapProperty.getInt("game.metal.initCount"); i++) { // 金属墙布局
             if (i < 10) {
                 metalWall.add(WallFactory.getWall("metal",140 + 30 * i, 150, this));
                 metalWall.add(WallFactory.getWall("metal",600, 400 + 20 * (i),this));
             } else if (i < 20) {
                 metalWall.add(WallFactory.getWall("metal",140 + 30 * (i - 10), 180, this));
-            }
-            else {
+            } else {
                 metalWall.add(WallFactory.getWall("metal",500 + 30 * (i - 10), 160, this));
             }
         }
 
-        for (int i = 0; i < 4; i++) { // 树的布局
+        for (int i = 0; i < MapProperty.getInt("game.tree.initCount"); i++) { // 树的布局
             if (i < 4) {
                 trees.add(new Tree(0 + 30 * i, 360, this));
                 trees.add(new Tree(220 + 30 * i, 360, this));
