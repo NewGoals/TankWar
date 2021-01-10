@@ -9,7 +9,7 @@ public class Property {
     static {
         InputStream inputStream = null;
         try {
-            inputStream = new FileInputStream(new File("system.properties"));
+            inputStream = Property.class.getClassLoader().getResourceAsStream("system.properties");
             properties = new Properties();
             properties.load(inputStream);
         } catch (FileNotFoundException e) {
@@ -31,10 +31,10 @@ public class Property {
 
     public static int getInt(String Key) {
         String value = getString(Key);
-        if (Pattern.matches("[0-9]+",value)){
+        if (Pattern.matches("[0-9]+", value)) {
             return Integer.parseInt(value);
         } else {
-            throw new ClassCastException("[" + value  + "] is not a number! Check the property: [" + Key + "]");
+            throw new ClassCastException("[" + value + "] is not a number! Check the property: [" + Key + "]");
         }
     }
 
